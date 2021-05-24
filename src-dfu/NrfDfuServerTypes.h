@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <string>
 
 #define NORDIC_SECURE_DFU_SERVICE "0000fe59-0000-1000-8000-00805f9b34fb"      // Service handle 0x000b
 #define NORDIC_DFU_CONTROL_POINT_CHAR "8ec90001-f315-4f60-9fb8-838830daea50"  // Handle 0x000F
