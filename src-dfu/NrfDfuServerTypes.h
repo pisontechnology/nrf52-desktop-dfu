@@ -8,8 +8,9 @@
 #define NORDIC_DFU_PACKET_CHAR "8ec90002-f315-4f60-9fb8-838830daea50"         // Handle 0x000D
 
 #define FLASH_PAGE_SIZE 4096
-// TODO: MTU Size will depend on platform (MacOs -.-)
-#define MTU_CHUNK 244
+
+// TODO: MTU Size will depend on platform (MacOs -.-), 20 byte chunk is a safe bet to start with
+#define MTU_CHUNK 20
 
 #define RESPONSE_LEN_CHECKSUM 8
 #define RESPONSE_LEN_SELECT 12

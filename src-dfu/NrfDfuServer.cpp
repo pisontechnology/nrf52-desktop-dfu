@@ -150,7 +150,16 @@ void NrfDfuServer::manage_state() {
         case DATAFILE_WRITE_FILE:
             this->waiting_response = false;  // Device does not respond until checksum request
             this->calculate_crc(this->datafile_data.c_str(), this->datafile_data.length());
-            this->write_packet(this->datafile_data);  // send data file
+            this->data_mtu_chunks_remaing = this->datafile_data.length() / MTU_CHUNK;
+            this->data_mtu_extra_bytes = this->datafile_data.length() % MTU_CHUNK;
+            for (i = 0; i < this->data_mtu_chunks_remaing; i++) {
+                this->write_packet( std::string(&this->datafile_data.c_str()[this->datafile_data.length() + MTU_CHUNK * i], MTU_CHUNK));  // send data file
+                //std::cout << " MTU chunk " << MTU_CHUNK << std::endl;
+            }
+            if (this->data_mtu_extra_bytes) {
+                this->write_packet(std::string(&this->datafile_data.c_str()[this->datafile_data.length() + MTU_CHUNK * i], this->data_mtu_extra_bytes));  // send data file
+                //std::cout << " Last MTU chunk " << this->data_mtu_extra_bytes << std::endl;
+            }
             break;
 
         case DATAFILE_REQ_CHECKSUM:

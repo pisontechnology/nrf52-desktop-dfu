@@ -222,6 +222,10 @@ class NrfDfuServer {
     const std::string &datafile_data;
     const std::string &binfile_data;
 
+    // * Data file sending variables
+    uint32_t data_mtu_extra_bytes;
+    uint32_t data_mtu_chunks_remaing;
+
     // * Bin file sending variables
     uint32_t bin_bytes_written;   // Total bin_bytes_written
     uint32_t bin_bytes_to_write;  // Bytes to write on mtu cycle
